@@ -7,7 +7,7 @@ def set_owner_pure_phone(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
 
-    for apartment in Flat.objects.all():
+    for apartment in Flat.objects.iterator():
         flat, created = Owner.objects.get_or_create(
             owner_name=apartment.owner,
             owner_phone_number=apartment.owners_phonenumber,

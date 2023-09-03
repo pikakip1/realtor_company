@@ -5,11 +5,14 @@ from django.db import migrations
 
 def set_owner_pure_phone(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
-    for card_flat in Flat.objects.all():
+    for card_flat in Flat.objects.iterator():
         number = phonenumbers.parse(card_flat.owners_phonenumber, 'RU')
         if phonenumbers.is_valid_number(number):
-            card_flat.owner_pure_phone = f'+7{number.national_number}'
+            card_flat.owner_pure_phone = f'{number.country_code}{number.national_number}'
             card_flat.save()
+
+    Flat.objects.filter()
+
 
 
 class Migration(migrations.Migration):
