@@ -72,7 +72,7 @@ class Owner(models.Model):
 class Complaint(models.Model):
     name = models.ForeignKey(User, on_delete=models.CASCADE, related_name='complaint_about', verbose_name='Кто жаловался')
     apartment = models.ForeignKey(Flat, on_delete=models.CASCADE, related_name='complaint_from', verbose_name='На квартиру')
-    complaint = models.TextField(max_length=1000, verbose_name='Текст жалобы')
+    message = models.TextField(max_length=1000, verbose_name='Текст жалобы')
 
     def __str__(self):
         return f'{self.name}'
