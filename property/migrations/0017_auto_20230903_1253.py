@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.RenameField(
             model_name='complaint',
             old_name='text_complaint',
-            new_name='complaint',
+            new_name='message',
         ),
         migrations.AlterField(
             model_name='flat',
