@@ -63,16 +63,16 @@ class Owner(models.Model):
         blank=True,
         verbose_name='Нормализованный номер владельца'
     )
-    flat = models.ManyToManyField(Flat, related_name='owner')
+    flat = models.ManyToManyField(Flat, related_name='apartment_owners', verbose_name='Квартиры в собственности')
 
     def __str__(self):
         return self.name
 
 
 class Complaint(models.Model):
-    name = models.ForeignKey(User, on_delete=models.CASCADE, related_name='complaint_about', verbose_name='Кто жаловался')
-    apartment = models.ForeignKey(Flat, on_delete=models.CASCADE, related_name='complaint_from', verbose_name='На квартиру')
+    name = models.ForeignKey(User, on_delete=models.CASCADE, related_name='complaints_from_users', verbose_name='Кто жаловался')
+    apartment = models.ForeignKey(Flat, on_delete=models.CASCADE, related_name='complained', verbose_name='На квартиру')
     message = models.TextField(max_length=1000, verbose_name='Текст жалобы')
 
     def __str__(self):
-        return f'{self.name}'
+        return self.name
